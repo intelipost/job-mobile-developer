@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { LocationsProvider } from '../../providers/locations/locations';
+
 /**
  * Generated class for the LocationsPage page.
  *
@@ -15,11 +17,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class LocationsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LocationsPage');
+  constructor(public navCtrl: NavController, public navParams: NavParams, public locationsProvider: LocationsProvider) {
   }
 
 }
