@@ -8,6 +8,8 @@ import { LocationsPage } from '../pages/locations/locations';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { Geolocation } from '@ionic-native/geolocation';
+import { GeolocationProvider } from '../providers/geolocation/geolocation';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    Geolocation,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    GeolocationProvider
   ]
 })
 export class AppModule {}
