@@ -1,17 +1,28 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>Home</ion-title>
-  </ion-navbar>
-</ion-header>
-
-<ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+<ion-content class="text-center" padding>
+  <div class="main" margin-vertical>
+    <img src="../assets/icon/map.png" margin-vertical>
+    <h3 class="title-red">Sua localização atual:</h3>
+    <p> lat: 43.0741904 - lng: -89.3809802</p>
+  </div>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12><h4 class="title-red">Suas últimas localizações:</h4></ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-3>22:00</ion-col>
+      <ion-col col-9>lat: 43.0741904 - lng: -89.3809802</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-3>22:00</ion-col>
+      <ion-col col-9>lat: 43.0741904 - lng: -89.3809802</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-3>22:00</ion-col>
+      <ion-col col-9>lat: 43.0741904 - lng: -89.3809802</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12 margin-vertical><a (click)="locationsPage();">Ver todas</a></ion-col>
+    </ion-row>
+  </ion-grid>
+  <button class="btn-red text-white">Transferir dados</button>
 </ion-content>
