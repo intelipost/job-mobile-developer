@@ -18,13 +18,10 @@ export class LocalDbProvider {
   //  usando a função abaixo, então o objeto do bd é passado como argumento para criar as tabelas se as mesmas
   //  não existirem.
 
-  openDb() {
-    this.sqlite.create({
+  getDb() {
+    return this.sqlite.create({
       name: "data.db",
       location: "default"
-    })
-    .then((db: SQLiteObject) => {
-      this.createTables(db);
     })
   }
 
@@ -32,13 +29,14 @@ export class LocalDbProvider {
   // locations é a tabela com as localizações que ainda não foram passadas para o servidor,
   // locations_synced é a tabela com as localizações que já foram sincronizadas para o server.
 
-  createTables(db) {
-    db.executeSql("create table if not exists locations(id INTEGER PRIMARY KEY AUTOINCREMENT, time TEXT, long TEXT, lat TEXT)", {})
-      .then()
-      .catch(err => console.log(err));
-    db.executeSql("create table if not exists locations_synced(id INTEGER PRIMARY KEY AUTOINCREMENT, time TEXT, long TEXT, lat TEXT)", {})
-      .then()
-      .catch(err => console.log(err));
+  createTables() {
+    return this.getDb()
+      .then((db: SQLiteObject) => { 
+      db.executeSql("create table if not exists locations(id INTEGER PRIMARY KEY AUTOINCREMENT, time TEXT, lng TEXT, lat TEXT)", {})
+        .catch(err => console.log('Erro na criação da tabela locations:', err));
+        db.executeSql("create table if not exists locations_synced(id INTEGER PRIMARY KEY AUTOINCREMENT, time TEXT, lng TEXT, lat TEXT)", {})
+        .catch(err => console.log('Erro na criação da tabela locations_synced:', err));
+    })
   }
 
 }

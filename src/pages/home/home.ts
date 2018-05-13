@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 
 import { LocationsPage } from '../locations/locations';
 
-import { GeolocationProvider } from '../../providers/geolocation/geolocation';
+import { LocationsProvider } from '../../providers/locations/locations';
 
 import { Geolocation } from '@ionic-native/geolocation';
 
@@ -17,8 +17,10 @@ export class HomePage {
   public lat;
   public lng;
   public timedate;
+  public locationObj;
+  public latestLocations;
 
-  constructor(public navCtrl: NavController, public geolocation: Geolocation) {
+  constructor(public navCtrl: NavController, public geolocation: Geolocation, public locationsProvider: LocationsProvider) {
     
   }
 
@@ -34,17 +36,39 @@ export class HomePage {
   // Pega as coordenadas atuais quando a view é carregada e começa a chamar a função que irá retornar
   // as coordenadas a cada três minutos
   getCurrentLocation() {
+    this.getCurrentTime();
     this.geolocation.getCurrentPosition(this.locationOptions).then((resp) => {
+      this.watchPosition(); // função pra continuar loop de verificação de coords
       this.lat = resp.coords.latitude;
       this.lng = resp.coords.longitude;
-      this.watchPosition();
-      this.getCurrentTime();
+      this.locationObj = {
+        time: this.timedate,
+        lat: this.lat,
+        lng: this.lng
+      }
+      //Insere localização no banco
+      this.locationsProvider.insertLocations(this.locationObj)
+        .then(res => { 
+          //Pega localizações após inserir
+          this.locationsProvider.getAllLocations()
+            .then(res => {
+              //Trata array após pegar localizações
+              this.getLatestLocations() 
+            }
+          );
+        }
+      );
     }).catch((error) => {
       console.log('Error getting location', error);
     });
   }
 
-  // Timeout de 3minutos pra chamar novamente a função que pega as coordenadas
+  //Pega as três ultimas localizações da base para exibir na home
+  getLatestLocations() {
+    this.latestLocations = this.locationsProvider.locations.slice(0, 3);
+  }
+
+  // Timeout de 3 minutos pra chamar novamente a função que pega as coordenadas
   watchPosition() {
     setTimeout(() => {
       this.getCurrentLocation();

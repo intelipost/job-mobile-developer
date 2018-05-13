@@ -11,6 +11,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import { LocalDbProvider } from '../providers/local-db/local-db';
 import { Geolocation } from '@ionic-native/geolocation';
+import { LocationsProvider } from '../providers/locations/locations';
 
 @NgModule({
   declarations: [
@@ -31,15 +32,12 @@ import { Geolocation } from '@ionic-native/geolocation';
   providers: [
     StatusBar,
     SplashScreen,
-<<<<<<< HEAD
     SQLite,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    LocalDbProvider
-=======
+    LocalDbProvider,
+    LocationsProvider,
     Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    GeolocationProvider
->>>>>>> feature/geolocationService
   ]
 })
 export class AppModule {}

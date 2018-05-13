@@ -28,31 +28,20 @@
     "@ionic-native/status-bar": "4.7.0",
     "@ionic/pro": "1.0.20",
     "@ionic/storage": "2.1.3",
-<<<<<<< HEAD
-    "cordova-plugin-device": "^2.0.2",
-    "cordova-plugin-ionic-keyboard": "^2.0.5",
-    "cordova-plugin-ionic-webview": "^1.1.19",
-    "cordova-plugin-splashscreen": "^5.0.2",
-    "cordova-plugin-whitelist": "^1.3.3",
     "cordova-sqlite-storage": "^2.3.1",
-=======
     "cordova-plugin-geolocation": "^4.0.1",
->>>>>>> feature/geolocationService
     "ionic-angular": "3.9.2",
     "ionicons": "3.0.0",
     "rxjs": "5.5.10",
     "sw-toolbox": "3.6.0",
     "zone.js": "0.8.26",
-<<<<<<< HEAD
     "cordova-browser": "~5.0.3",
-    "cordova-android": "~6.3.0"
-=======
+    "cordova-android": "~6.3.0",
     "cordova-plugin-whitelist": "1.3.3",
     "cordova-plugin-device": "2.0.2",
     "cordova-plugin-splashscreen": "5.0.2",
     "cordova-plugin-ionic-webview": "1.1.19",
     "cordova-plugin-ionic-keyboard": "2.0.5"
->>>>>>> feature/geolocationService
   },
   "devDependencies": {
     "@ionic/app-scripts": "3.1.9",

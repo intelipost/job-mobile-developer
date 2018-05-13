@@ -8,17 +8,9 @@
     <ion-row>
       <ion-col col-12><h4 class="title-red">Suas últimas localizações:</h4></ion-col>
     </ion-row>
-    <ion-row>
-      <ion-col col-3>22:00</ion-col>
-      <ion-col col-9>lat: 43.0741904 - lng: -89.3809802</ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col col-3>22:00</ion-col>
-      <ion-col col-9>lat: 43.0741904 - lng: -89.3809802</ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col col-3>22:00</ion-col>
-      <ion-col col-9>lat: 43.0741904 - lng: -89.3809802</ion-col>
+    <ion-row *ngFor="let location of latestLocations">
+      <ion-col col-2>{{location.time}}</ion-col>
+      <ion-col col-10>lat: {{location.lat}} - lng: {{location.lng}}</ion-col>
     </ion-row>
     <ion-row>
       <ion-col col-12 margin-vertical><a (click)="locationsPage();">Ver todas</a></ion-col>
