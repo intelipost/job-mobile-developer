@@ -12,7 +12,6 @@ import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 export class LocalDbProvider {
 
   constructor(private sqlite: SQLite) {
-    console.log('Hello LocalDbProvider Provider');
   }
 
   //  Usando SQLite como solução para a parte de armazenamento local, primeiramente abre-se ou cria-se o banco 
@@ -35,7 +34,7 @@ export class LocalDbProvider {
 
   createTables(db) {
     db.executeSql("create table if not exists locations(id INTEGER PRIMARY KEY AUTOINCREMENT, time TEXT, long TEXT, lat TEXT)", {})
-      .then(res => console.log("created table"))
+      .then()
       .catch(err => console.log(err));
     db.executeSql("create table if not exists locations_synced(id INTEGER PRIMARY KEY AUTOINCREMENT, time TEXT, long TEXT, lat TEXT)", {})
       .then()
