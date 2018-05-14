@@ -12,6 +12,9 @@ import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import { LocalDbProvider } from '../providers/local-db/local-db';
 import { Geolocation } from '@ionic-native/geolocation';
 import { LocationsProvider } from '../providers/locations/locations';
+import { Camera, CameraOptions } from '@ionic-native/camera';
+import { HttpProvider } from '../providers/http/http';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,6 +23,7 @@ import { LocationsProvider } from '../providers/locations/locations';
     LocationsPage
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     IonicModule.forRoot(MyApp)
   ],
@@ -33,10 +37,12 @@ import { LocationsProvider } from '../providers/locations/locations';
     StatusBar,
     SplashScreen,
     SQLite,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
     LocalDbProvider,
     LocationsProvider,
     Geolocation,
+    Camera,
+    HttpClientModule,
+    HttpProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
   ]
 })
