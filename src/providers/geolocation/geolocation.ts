@@ -48,6 +48,11 @@ export class GeolocationProvider {
         .then(res => { 
           // Pega localizações após inserir
           this.locationsProvider.getAllLocations()
+            .then(res => {
+              // Trata array após pegar localizações
+              this.getLatestLocations() 
+            }
+          );
         }
       );
     }).catch((error) => {

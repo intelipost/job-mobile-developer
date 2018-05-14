@@ -1,6 +1,5 @@
 <ion-content class="text-center" padding>
   <div class="main" margin-vertical>
-    <img src="../assets/icon/map.png" margin-vertical>
     <h3 class="title-red">Sua localização atual:</h3>
     <p> lat: {{geolocationProvider.lat}} - lng: {{geolocationProvider.lng}}</p>
   </div>
@@ -16,5 +15,5 @@
       <ion-col col-12 margin-vertical><a (click)="locationsPage();">Ver todas</a></ion-col>
     </ion-row>
   </ion-grid>
-  <button class="btn-red text-white">Transferir dados</button>
+  <button class="btn-red text-white" (click)="syncData()">Transferir dados</button>
 </ion-content>
