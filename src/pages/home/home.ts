@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 
 import { LocationsPage } from '../locations/locations';
 
 import { LocationsProvider } from '../../providers/locations/locations';
+import { HttpProvider } from '../../providers/http/http';
 
 import { Geolocation } from '@ionic-native/geolocation';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 
 @Component({
   selector: 'page-home',
@@ -20,7 +22,8 @@ export class HomePage {
   public locationObj;
   public latestLocations;
 
-  constructor(public navCtrl: NavController, public geolocation: Geolocation, public locationsProvider: LocationsProvider) {
+  constructor(public navCtrl: NavController, public geolocation: Geolocation, public locationsProvider: LocationsProvider, public httpProvider: HttpProvider, 
+              private camera: Camera, private alertCtrl: AlertController) {
     
   }
 
@@ -46,13 +49,13 @@ export class HomePage {
         lat: this.lat,
         lng: this.lng
       }
-      //Insere localização no banco
+      // Insere localização no banco
       this.locationsProvider.insertLocations(this.locationObj)
         .then(res => { 
-          //Pega localizações após inserir
+          // Pega localizações após inserir
           this.locationsProvider.getAllLocations()
             .then(res => {
-              //Trata array após pegar localizações
+              // Trata array após pegar localizações
               this.getLatestLocations() 
             }
           );
@@ -81,7 +84,33 @@ export class HomePage {
     let todayDate = new Date();
     let hour = todayDate.getHours();
     let minutes = todayDate.getMinutes();
-    this.timedate = hour.toString() + ":" + minutes.toString();
+    minutes < 10 ? this.timedate = hour.toString() + ":0" + minutes.toString() : this.timedate = hour.toString() + ":" + minutes.toString()
+  }
+
+  //Envia localizações e imagem tirada com camera para o servidor 
+  syncData() {
+
+    const options: CameraOptions = {
+      destinationType: this.camera.DestinationType.DATA_URL,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+
+    this.camera.getPicture(options).then((imageData) => {
+      let base64Image = 'data:image/jpeg;base64,' + imageData;
+      let postObj = {
+        'image': base64Image,
+        'locations': this.locationsProvider.locations
+      }
+      this.httpProvider.sendData(postObj).subscribe(res => {
+        let confirmationAlert = this.alertCtrl.create({
+          title: 'Enviado com sucesso!',
+          buttons: ['OK']
+        });
+        confirmationAlert.present();
+      });
+    }, (err) => {
+      console.log(err);
+    });
   }
 
   locationsPage() {
