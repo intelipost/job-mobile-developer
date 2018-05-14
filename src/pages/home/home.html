@@ -2,13 +2,13 @@
   <div class="main" margin-vertical>
     <img src="../assets/icon/map.png" margin-vertical>
     <h3 class="title-red">Sua localização atual:</h3>
-    <p> lat: {{lat}} - lng: {{lng}}</p>
+    <p> lat: {{geolocationProvider.lat}} - lng: {{geolocationProvider.lng}}</p>
   </div>
   <ion-grid>
     <ion-row>
       <ion-col col-12><h4 class="title-red">Suas últimas localizações:</h4></ion-col>
     </ion-row>
-    <ion-row *ngFor="let location of latestLocations">
+    <ion-row *ngFor="let location of geolocationProvider.latestLocations">
       <ion-col col-2>{{location.time}}</ion-col>
       <ion-col col-10>lat: {{location.lat}} - lng: {{location.lng}}</ion-col>
     </ion-row>
