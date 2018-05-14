@@ -13,7 +13,6 @@ import { LocalDbProvider } from '../providers/local-db/local-db';
 import { Geolocation } from '@ionic-native/geolocation';
 import { LocationsProvider } from '../providers/locations/locations';
 import { GeolocationProvider } from '../providers/geolocation/geolocation';
-import { HttpProvider } from '../providers/http/http';
 
 @NgModule({
   declarations: [
@@ -35,12 +34,12 @@ import { HttpProvider } from '../providers/http/http';
     StatusBar,
     SplashScreen,
     SQLite,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
     LocalDbProvider,
     LocationsProvider,
     Geolocation,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
     GeolocationProvider,
-    HttpProvider,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
 export class AppModule {}
