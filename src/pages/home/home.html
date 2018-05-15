@@ -1,0 +1,19 @@
+<ion-content class="text-center" padding>
+  <div class="main" margin-vertical>
+    <h3 class="title-red">Sua localização atual:</h3>
+    <p> lat: {{geolocationProvider.lat}} - lng: {{geolocationProvider.lng}}</p>
+  </div>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12><h4 class="title-red">Suas últimas localizações:</h4></ion-col>
+    </ion-row>
+    <ion-row *ngFor="let location of geolocationProvider.latestLocations">
+      <ion-col col-2>{{location.time}}</ion-col>
+      <ion-col col-10>lat: {{location.lat}} - lng: {{location.lng}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12 margin-vertical><a (click)="locationsPage();">Ver todas</a></ion-col>
+    </ion-row>
+  </ion-grid>
+  <button class="btn-red text-white" (click)="syncData()">Transferir dados</button>
+</ion-content>

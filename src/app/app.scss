@@ -1,0 +1,71 @@
+// Estilos gerais, para manter consistência na estilização do app
+
+// Alinhamento
+%center {
+    text-align: center;
+}
+
+// Base
+%btn {
+    text-transform: uppercase;
+    display: block;
+    margin: 0 auto;
+    font-size: 16px;
+    padding: 16px;
+    border-radius: 2px;
+}
+
+// Cores
+%white-background {
+    background-color: #fff;
+}
+
+%red-background {
+    background-color: #e74c3c;
+}
+
+%red-color {
+    color: #e74c3c !important;
+}
+
+%white-color {
+    color: #fff !important;
+}
+
+// Redefinições dos estilos base Ionic
+
+.toolbar-background-md {
+    @extend %white-background;
+}
+
+.header-md::after {
+    background-image: none;
+}
+
+.toolbar-title-md {
+    @extend %red-color;
+}
+
+// Concatenação de estilos nas classes
+.btn {
+    @extend %btn;
+    &-red {
+        @extend %btn;
+        @extend %red-background;
+    }
+}
+
+.title {
+    &-red {
+        @extend %red-color;
+    }
+}
+
+.text {
+    &-white {
+        @extend %white-color;
+    }
+    &-center {
+        @extend %center;
+    }
+}

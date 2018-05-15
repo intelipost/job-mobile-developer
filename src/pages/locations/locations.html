@@ -1,0 +1,17 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Todas as localizações</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row *ngFor="let location of this.locationsProvider.locations">
+      <ion-col col-2>{{location.time}}</ion-col>
+      <ion-col col-10>lat: {{location.lat}} - lng: {{location.lng}}</ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
