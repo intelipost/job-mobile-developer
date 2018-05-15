@@ -24,7 +24,7 @@ Para isso, organizamos nosso sistema em micro serviços na AWS com Docker e Kube
 
 ## O desafio
 
-Você deverá construir usando IONIC 3 um aplicativo que irá rastrear os movimentos do celular do usuário a cada 3 minutos, buscando sua localização pelo GPS com alta precisão. Deverá armazenar localmente estas informações, uma vez que o aplicativo pode estar funcionando sem conectividade com a internet. Seria interessante que pudessemos ver as últimas localizações captadas, com horário e coordenadas.
+Você deverá construir usando ***IONIC 3*** um aplicativo que irá rastrear os movimentos do celular do usuário a cada 3 minutos, buscando sua localização pelo GPS com alta precisão. Deverá armazenar localmente estas informações, uma vez que o aplicativo pode estar funcionando sem conectividade com a internet. Seria interessante que pudessemos ver as últimas localizações captadas, com horário e coordenadas.
 
 Uma vez captadas a localização do usuário, ele deverá ter uma função no aplicativo para "sincronizar" com o servidor estes dados. Quando solicitada a sincronização o usuário deverá tirar uma selfie, usando a camera do celular, e enviar esta imagem (encodada em base64) junto com a lista de todas as posições rastreadas para um servidor externo. 
 
@@ -35,15 +35,17 @@ O envio deverá ser em um objeto JSON, e o endpoint poderá ser temporário, con
 * O código deverá ser hospedado em algum repositório público. Diversos quesitos serão avaliados aqui, como organização do código, sequencialidade de commits, nomeação de arquivos, funções, etc.
 * O código deverá estar pronto para ser executado e testado, portanto, caso exista algum requisito, este deve estar completamente documentado no README do seu projeto.
 * Esperamos também alguma explicação sobre a solução, que pode ser em comentários no código, um texto escrito ou até um vídeo narrativo explicando a abordagem utilizada. 
+* Seria interessante ter telas com uma identidade visual e utilizar componentes de template do Ionic.
 * Ver a utilização de dependency managers (npm, webpack)
-* Automação de tasks com gulp, grunt ou outra ferramenta de sua escolha
+* Se possível um icone e splash screen para o app
+* Automação de tasks com gulp ou outra ferramenta de sua escolha
 
 
 ### O que nós ficaríamos felizes de ver em seu teste
 
 * Testes
 * Processo de build e deploy documentado
-* Ver o código rodando live (Com Ionic View)
+* Ver o código rodando live (Com Ionic DevApp)
 * Alguma metodologia para definição e organização do seu código CSS
 
 ### O que nós não gostaríamos
