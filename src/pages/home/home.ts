@@ -23,13 +23,11 @@ export class HomePage {
   public locationObj;
   public latestLocations;
 
-  constructor(public navCtrl: NavController, public geolocation: Geolocation, public locationsProvider: LocationsProvider, public httpProvider: HttpProvider, public geolocationProvider: GeolocationProvider, 
-              private camera: Camera, private alertCtrl: AlertController) {
-    
-  }
-
-  ionViewDidLoad() {
-    this.geolocationProvider.getCurrentLocation();
+  
+  constructor(public navCtrl: NavController, public geolocation: Geolocation, public locationsProvider: LocationsProvider, public httpProvider: HttpProvider, public geolocationProvider: GeolocationProvider, private camera: Camera, private alertCtrl: AlertController, public platform: Platform) {
+      this.platform.ready().then(() => {
+        this.geolocationProvider.getCurrentLocation();
+    })
   }
 
   //Envia localizações e imagem tirada com camera para o servidor 
