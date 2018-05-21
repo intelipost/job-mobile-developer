@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController } from 'ionic-angular';
+import { NavController, AlertController, Platform } from 'ionic-angular';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 
 import { LocationsPage } from '../locations/locations';
