@@ -30,6 +30,8 @@ Uma vez captadas a localização do usuário, ele deverá ter uma função no ap
 
 O envio deverá ser em um objeto JSON, e o endpoint poderá ser temporário, configurado em qualquer serviço com este fim como requestbin (https://requestbin.fullcontact.com/) ou hookbin (https://hookbin.com).
 
+Também ter uma tela que liste notícias com foto e que seja possível ver a noticia por completo, pode usar qualquer api externa ou criar um mock de API.
+
 ### O que nós esperamos do seu teste
 
 * O código deverá ser hospedado em algum repositório público. Diversos quesitos serão avaliados aqui, como organização do código, sequencialidade de commits, nomeação de arquivos, funções, etc.
