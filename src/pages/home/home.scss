@@ -2,14 +2,27 @@ page-home {
     .item-md {
         height: 140px;
         margin-bottom: 16px;
-        border-radius: 8px;
+        border-radius: 4px;
 
         &.item-block .item-inner {
             border-bottom: none;
         }
 
-        .label-md p {
-            font-size: 20px;
+        .label-md {
+            h2 {
+                font-size: 20px;
+                font-weight: bold;
+            }
+
+            p {
+                font-size: 12px;
+                color: #e1e1e1;
+            }
+        }
+
+        .icon-md::before {
+            font-size: 36px;
+            font-weight: bold;
         }
     }
 }
