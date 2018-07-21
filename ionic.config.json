@@ -1,0 +1,8 @@
+{
+  "name": "job-mobile-developer",
+  "app_id": "",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
