@@ -1,3 +1,15 @@
 page-home {
+    .item-md {
+        height: 140px;
+        margin-bottom: 16px;
+        border-radius: 8px;
 
+        &.item-block .item-inner {
+            border-bottom: none;
+        }
+
+        .label-md p {
+            font-size: 20px;
+        }
+    }
 }

@@ -32,13 +32,23 @@ $app-direction: ltr;
 // to match your app's branding. Ionic uses a Sass map of
 // colors so you can add, rename and remove colors as needed.
 // The "primary" color is the only required color in the map.
+$gradient1: #00537E;
+$gradient2: #3AA17E;
 
 $colors: (
   primary:    #488aff,
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
-  dark:       #222
+  dark:       #222,
+  gradient1: (
+      base: $gradient1,
+      contrast: #fff
+  ),
+  gradient2: (
+      base: $gradient2,
+      contrast: #fff
+  )
 );
 
 
