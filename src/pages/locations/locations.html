@@ -3,21 +3,21 @@
         <ion-title>
             Minhas Localizações
         </ion-title>
+
+        <ion-buttons end>
+            <ion-toggle checked="{{isActive()}}" color="gradient1" (ionChange)="changeWatchPosition()"></ion-toggle>
+        </ion-buttons>
     </ion-navbar>
 </ion-header>
 
 <ion-content>
-    <ion-item>
-        <ion-label>Obter localização?</ion-label>
-        <ion-toggle checked="{{isActive()}}" color="gradient2" (ionChange)="changeWatchPosition()"></ion-toggle>
-    </ion-item>
-
     <ion-list>
         <ion-list-header>
-            Últimas localizações
+            Últimas 10 localizações
         </ion-list-header>
-        <ion-item>
-
+        <ion-item *ngFor="let location of locations">
+            <p>Em {{location.date | date: 'dd/MM/yyyy'}} as {{location.date | date: 'hh:mm:ss'}}</p>
+            <p>Latitude: {{location.latitude}} | Longitude: {{location.longitude}}</p>
         </ion-item>
     </ion-list>
 </ion-content>

@@ -3,7 +3,6 @@ import { Observable } from 'rxjs/Observable';
 import { Platform } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { DatabaseProvider } from './database';
-import { LocationStrategy } from '../../node_modules/@angular/common';
 
 const LOCATION_INTERVAL = 180000;
 
@@ -80,5 +79,22 @@ export class LocationProvider {
 
     isActive() {
         return this.active_watch;
+    }
+
+    getLastLocations() {
+        return Observable.create(observer => {
+            this.database.executeSql('SELECT * FROM locations order by date desc LIMIT 10').subscribe(res => {
+                let result = [];
+
+                for (let i = 0; i < res.rows.length; i++) {
+                    result.push(res.rows.item(i));
+                }
+
+                observer.next(result);
+                observer.complete();
+            }, err => {
+                observer.error(err);
+            })
+        })
     }
 }

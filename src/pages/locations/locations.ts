@@ -8,12 +8,13 @@ import { LocationProvider } from '../../providers/location';
     templateUrl: 'locations.html',
 })
 export class LocationsPage {
+    private locations: any[];
+
     constructor(public navCtrl: NavController, public navParams: NavParams, private locationProvider: LocationProvider) {
+        this.getLastLocations();
     }
 
     changeWatchPosition() {
-        console.log(this.locationProvider.isActive());
-
         if (this.locationProvider.isActive()) {
             this.locationProvider.stopWatchPosition();
         } else {
@@ -23,5 +24,11 @@ export class LocationsPage {
 
     isActive() {
         this.locationProvider.isActive();
+    }
+
+    getLastLocations() {
+        this.locationProvider.getLastLocations().subscribe(res => {
+            this.locations = res;
+        });
     }
 }
