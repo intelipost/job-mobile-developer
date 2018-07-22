@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { LocationProvider } from '../../providers/location';
+import { CameraProvider } from '../../providers/camera';
 
 @IonicPage()
 @Component({
@@ -10,7 +11,12 @@ import { LocationProvider } from '../../providers/location';
 export class LocationsPage {
     private locations: any[];
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, private locationProvider: LocationProvider) {
+    constructor(
+        public navCtrl: NavController, 
+        public navParams: NavParams, 
+        private locationProvider: LocationProvider,
+        private cameraProvider: CameraProvider
+    ) {
         this.getLastLocations();
     }
 
@@ -30,5 +36,13 @@ export class LocationsPage {
         this.locationProvider.getLastLocations().subscribe(res => {
             this.locations = res;
         });
+    }
+
+    sync() {
+        this.cameraProvider.takePhoto().subscribe(res => {
+            console.log(res);
+        }, err => {
+            console.error('falaha ao acessar a camera');
+        })
     }
 }

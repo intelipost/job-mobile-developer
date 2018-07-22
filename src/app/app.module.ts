@@ -6,12 +6,14 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Geolocation } from '@ionic-native/geolocation';
 import { SQLite } from '@ionic-native/sqlite';
+import { Camera } from '@ionic-native/camera';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 
 import { LocationProvider } from '../providers/location';
 import { DatabaseProvider } from '../providers/database';
+import { CameraProvider } from '../providers/camera';
 
 @NgModule({
   declarations: [
@@ -32,9 +34,11 @@ import { DatabaseProvider } from '../providers/database';
     SplashScreen,
     Geolocation,
     SQLite,
+    Camera,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     LocationProvider,
-    DatabaseProvider
+    DatabaseProvider,
+    CameraProvider
   ]
 })
 export class AppModule {}
