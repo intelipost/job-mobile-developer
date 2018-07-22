@@ -3,9 +3,24 @@ import { Observable } from 'rxjs/Observable';
 import { Platform } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 
+const LOCATION_INTERVAL = 180000;
+
 @Injectable()
 export class LocationProvider {
+    private intervalId: any;
+
     constructor(private platform: Platform, private geolocation: Geolocation) {
+    }
+
+    startWatchPosition() {
+        this.getLocation().subscribe(res => {
+            this.intervalId = setInterval(() => {
+            }, LOCATION_INTERVAL)
+        })
+    }
+
+    stopWatchPosition() {
+        clearInterval(this.intervalId);
     }
     
     getLocation() {
