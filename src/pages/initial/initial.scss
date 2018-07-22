@@ -1,0 +1,23 @@
+page-initial {
+    #initial{
+        background: color($colors, energy);
+        h1{
+            font-size: 32px;
+            margin-top:30px;
+            text-align:center;
+            color:#fff;
+        }
+        h2{
+            font-size: 32px;
+            margin-top:50px;
+            text-align:center;
+            color:#fff;
+        }
+        .marginTop{
+            margin-top:150px;
+        }
+        .logo{
+            height: 100px;
+        }
+    }
+}

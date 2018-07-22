@@ -1,0 +1,51 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Cadastre-se</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <h2>
+    <img src="assets/imgs/logo.png" class="logo" />
+  </h2>
+  <form [formGroup]="userAddForm">
+    <ion-item>
+      <ion-label floating>Nome Completo</ion-label>
+      <ion-input [formControl]="userAddForm.controls['name']" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>E-mail</ion-label>
+      <ion-input [formControl]="userAddForm.controls['email']" type="email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Senha</ion-label>
+      <ion-input [formControl]="userAddForm.controls['password']" type="password"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Confirmar senha</ion-label>
+      <ion-input [formControl]="userAddForm.controls['passwordConfirmation']" type="password"></ion-input>
+    </ion-item>
+
+    <ion-row>
+      <ion-col text-center>
+        <button ion-button block color="energy" (click)="onSignIn()">
+          Sign in
+        </button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col text-center>
+        <button ion-button clear color="energy" (click)="onForgotPassword()">
+          Forgot your password?
+        </button>
+      </ion-col>
+    </ion-row>
+
+  </form>
+</ion-content>
