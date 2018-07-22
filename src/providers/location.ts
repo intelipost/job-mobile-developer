@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { Platform, Events } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { DatabaseProvider } from './database';
+import { HttpClient } from '@angular/common/http';
 
 const LOCATION_INTERVAL = 180000;
 
@@ -99,5 +100,32 @@ export class LocationProvider {
                 observer.error(err);
             })
         })
+    }
+
+    getLocationsNotSynced() {
+        return Observable.create(observer => {
+            this.database.executeSql('SELECT * FROM locations WHERE sync = ?', [false]).subscribe(res => {
+                let result = [];
+
+                for (let i = 0; i < res.rows.length; i++) {
+                    result.push(res.rows.item(i));
+                }
+
+                observer.next(result);
+                observer.complete();
+            }, err => {
+                observer.error(err);
+            })
+        })
+    }   
+
+    updateLocationsAsSynced(locations) {
+        locations.forEach(location => {
+            this.database.executeSql('UPDATE locations SET sync = ? WHERE id = ?', [true, location.id]).subscribe(res => {
+                console.log(res);
+            }, err => { 
+                console.error('falha ao atualizar a localização', err);
+            })
+        });
     }
 }
