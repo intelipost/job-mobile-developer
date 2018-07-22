@@ -5,21 +5,29 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import { LocationProvider } from '../providers/location';
+import { DatabaseProvider } from '../providers/database';
+
 @Component({
-  templateUrl: 'app.html'
+    templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = HomePage;
+    rootPage:any = HomePage;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private locationProvider: LocationProvider) {
-    platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      statusBar.styleDefault();
-      splashScreen.hide();
+    constructor(
+        platform: Platform, 
+        statusBar: StatusBar, 
+        splashScreen: SplashScreen, 
+        private locationProvider: LocationProvider,
+        private database: DatabaseProvider
+    ) {
+        platform.ready().then(() => {
+            // Okay, so the platform is ready and our plugins are available.
+            // Here you can do any higher level native things you might need.
+            statusBar.styleDefault();
+            splashScreen.hide();
 
-      this.locationProvider.startWatchPosition();
-    });
-  }
+            this.locationProvider.startWatchPosition();
+        });
+    }
 }
 
