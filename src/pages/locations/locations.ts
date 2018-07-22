@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 import { LocationProvider } from '../../providers/location';
 import { CameraProvider } from '../../providers/camera';
 
@@ -15,9 +15,15 @@ export class LocationsPage {
         public navCtrl: NavController, 
         public navParams: NavParams, 
         private locationProvider: LocationProvider,
-        private cameraProvider: CameraProvider
+        private cameraProvider: CameraProvider,
+        private events: Events
     ) {
         this.getLastLocations();
+
+        this.events.unsubscribe('new-location');
+        this.events.subscribe('new-location', () => {
+            this.getLastLocations();
+        })
     }
 
     changeWatchPosition() {

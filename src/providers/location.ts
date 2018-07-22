@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Platform } from 'ionic-angular';
+import { Platform, Events } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { DatabaseProvider } from './database';
 
@@ -14,7 +14,8 @@ export class LocationProvider {
     constructor(
         private platform: Platform, 
         private geolocation: Geolocation,
-        private database: DatabaseProvider
+        private database: DatabaseProvider,
+        private events: Events
     ) {
     }
 
@@ -42,6 +43,8 @@ export class LocationProvider {
     saveLocation(location) {
         this.database.executeSql('INSERT INTO locations(date, latitude, longitude, sync) VALUES(?,?,?,?)', [location.date, location.latitude, location.longitude, false]).subscribe(res => {
             console.log('coordenadas armazenada');
+
+            this.events.publish('new-location');
         }, err => {
             console.error('falha ao salvar a localização', err);
         })
