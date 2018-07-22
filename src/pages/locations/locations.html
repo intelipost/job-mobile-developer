@@ -1,0 +1,27 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            Minhas Localizações
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-item>
+        <ion-label>Obter localização?</ion-label>
+        <ion-toggle checked="{{isActive()}}" color="gradient2" (ionChange)="changeWatchPosition()"></ion-toggle>
+    </ion-item>
+
+    <ion-list>
+        <ion-list-header>
+            Últimas localizações
+        </ion-list-header>
+        <ion-item>
+
+        </ion-item>
+    </ion-list>
+</ion-content>
+
+<ion-footer>
+    <button ion-button large full>Sincronizar</button>
+</ion-footer>

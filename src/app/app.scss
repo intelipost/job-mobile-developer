@@ -31,3 +31,13 @@
     background: linear-gradient(to right, $gradient1 0%, $gradient2 100%);
     box-shadow: none;
 }
+
+.bar-button-default-md {
+    color: #fff;
+}
+
+.button-md {
+    box-shadow: none;
+    background: linear-gradient(to right, $gradient1 0%, $gradient2 100%);
+    margin: 0px;
+}

@@ -10,6 +10,7 @@ const LOCATION_INTERVAL = 180000;
 @Injectable()
 export class LocationProvider {
     private intervalId: any;
+    private active_watch: boolean;
 
     constructor(
         private platform: Platform, 
@@ -19,6 +20,8 @@ export class LocationProvider {
     }
 
     startWatchPosition() {
+        this.active_watch = true;
+
         this.getLocation().subscribe(res => {
             //armazena a primeira localização
             this.saveLocation(res);
@@ -33,6 +36,7 @@ export class LocationProvider {
     }
 
     stopWatchPosition() {
+        this.active_watch = false;
         clearInterval(this.intervalId);
     }
 
@@ -72,5 +76,9 @@ export class LocationProvider {
                 observer.complete();
             }
         })  
+    }
+
+    isActive() {
+        return this.active_watch;
     }
 }
