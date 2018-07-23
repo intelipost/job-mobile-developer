@@ -33,7 +33,7 @@ export class LoginPage {
       this.userProvider.getUserByCredentials(this.credentialsForm.value).then(response => {
         if (response) {
           this.storage.set('isUserLogged', true).then(() => {
-            this.storage.set('userLogged', response).then(() => {
+            this.storage.set('userLogged', response[0]).then(() => {
               this.navCtrl.setRoot(HomePage);
             });
           });

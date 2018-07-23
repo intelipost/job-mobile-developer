@@ -21,12 +21,15 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { SQLite } from '@ionic-native/sqlite';
 import { Toast } from '@ionic-native/toast';
+import { Geolocation } from '@ionic-native/geolocation';
+import { Camera } from '@ionic-native/camera';
 
 //providers
 import { DataBaseProvider } from '../providers/data-base/data-base';
 import { UsersProvider } from '../providers/users/users';
 import { LocationsProvider } from '../providers/locations/locations';
 import { UtilServiceProvider } from '../providers/util-service/util-service';
+import { GeolocationServiceProvider } from '../providers/geolocation-service/geolocation-service';
 
 @NgModule({
   declarations: [
@@ -67,10 +70,13 @@ import { UtilServiceProvider } from '../providers/util-service/util-service';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     SQLite,
     Toast,
+    Geolocation,
+    Camera,
     DataBaseProvider,
     UsersProvider,
     LocationsProvider,
-    UtilServiceProvider
+    UtilServiceProvider,
+    GeolocationServiceProvider
   ]
 })
 export class AppModule {}

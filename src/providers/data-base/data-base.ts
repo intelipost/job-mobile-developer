@@ -43,7 +43,7 @@ export class DataBaseProvider {
     // Criando as tabelas
     db.sqlBatch([
       ['CREATE TABLE IF NOT EXISTS users (id integer primary key AUTOINCREMENT NOT NULL, firstName TEXT, lastName TEXT, email TEXT, password TEXT)'],
-      ['CREATE TABLE IF NOT EXISTS locations (id integer primary key AUTOINCREMENT NOT NULL, name TEXT, lng TEXT, lat TEXT, time TEXT, date DATE, status integer, user_id integer, FOREIGN KEY(user_id) REFERENCES users(id))']
+      ['CREATE TABLE IF NOT EXISTS locations (id integer primary key AUTOINCREMENT NOT NULL, lat TEXT, lng TEXT, time TEXT, status integer, user_id integer, FOREIGN KEY(user_id) REFERENCES users(id))']
     ])
       .then(() => console.log('Tabelas criadas'))
       .catch(e => console.error('Erro ao criar as tabelas', e));
@@ -60,7 +60,7 @@ export class DataBaseProvider {
         if (data.rows.item(0).qtd == 0) {
           // Inserindo os dados nas tabelas
           db.sqlBatch([
-            ['insert into users (firstName, lastName, email, password) values (?, ?, ?, ?)', ['Admin', 'Sistema', 'admin@myroute.com', '12345']]
+            ['INSERT INTO users (firstName, lastName, email, password) VALUES (?, ?, ?, ?)', ['Admin', 'Sistema', 'admin@myroute.com', '12345']]
           ])
             .then(() => console.log('Usuário admin inserido com sucesso.'))
             .catch(e => console.error('Erro ao incluir usuárioo', e));

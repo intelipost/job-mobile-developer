@@ -7,14 +7,12 @@ import { HomePage } from '../pages/home/home';
 import { AboutPage } from '../pages/about/about';
 import { LoginPage } from '../pages/login/login';
 import { LocationsPage } from '../pages/locations/locations';
-import { LocationPage } from '../pages/location/location';
 import { ContactPage } from '../pages/contact/contact';
 import { ProfilePage } from '../pages/profile/profile';
-import { PresentationPage } from '../pages/presentation/presentation';
 import { InitialPage } from '../pages/initial/initial';
 import { SignUpPage } from '../pages/sign-up/sign-up';
 import { DataBaseProvider } from '../providers/data-base/data-base';
-
+import { GeolocationServiceProvider } from '../providers/geolocation-service/geolocation-service';
 
 @Component({
   templateUrl: 'app.html'
@@ -22,17 +20,20 @@ import { DataBaseProvider } from '../providers/data-base/data-base';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  public rootPage: any = InitialPage;
 
-  pages: Array<{ title: string, component: any }>;
-  userLogged;
+  public pages: Array<{ title: string, component: any }>;
+  public locations;
+  public userLogged: Array<any> = [];
+
   constructor(
     private platform: Platform,
     private statusBar: StatusBar,
     private splashScreen: SplashScreen,
     private app: App,
     private storage: Storage,
-    private dataBaseProvider: DataBaseProvider
+    private dataBaseProvider: DataBaseProvider,
+    private geolocationService: GeolocationServiceProvider,
   ) {
     this.initializeApp();
   }
@@ -47,9 +48,6 @@ export class MyApp {
       this.dataBaseProvider.createDatabase();
       // monta o menu
       this.pages = [
-        { title: 'Cadastro', component: SignUpPage },
-        { title: "Boas vindas", component: InitialPage },
-        { title: 'Apresentação', component: PresentationPage },
         { title: 'Home', component: HomePage },
         { title: 'Minhas Localizações', component: LocationsPage },
         { title: 'Sobre', component: AboutPage },
@@ -65,6 +63,7 @@ export class MyApp {
         } else {
           this.storage.get('userLogged').then((response) => {
             this.userLogged = response;
+            this.setCaptureLocation();
           });
           //Verificando se é o primeiro acesso
           /**
@@ -76,6 +75,19 @@ export class MyApp {
         }
       });
     });
+  }
+
+  setCaptureLocation() {
+    this.geolocationService.getCurrentLocation().then(response => {
+      if (response) {
+        // Timeout de 5 segundos pra chamar novamente a função que pega as coordenadas
+        setTimeout(() => {
+          this.setCaptureLocation();
+        }, 5000);
+      }
+    }).catch(e => {
+      console.log("Erro na captura da localização:" + e);
+    })
   }
 
   openPage(page) {

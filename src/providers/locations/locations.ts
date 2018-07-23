@@ -4,7 +4,6 @@ import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 
 @Injectable()
 export class LocationsProvider {
-
   public locations: Array<any> = [];
 
   constructor(
