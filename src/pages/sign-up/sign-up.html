@@ -10,39 +10,36 @@
   <h2>
     <img src="assets/imgs/logo.png" class="logo" />
   </h2>
-  <form [formGroup]="userAddForm">
+  <form [formGroup]="userAddForm" (submit)="addUser()" novalidate>
     <ion-item>
-      <ion-label floating>Nome Completo</ion-label>
-      <ion-input [formControl]="userAddForm.controls['name']" type="text"></ion-input>
+      <ion-label floating>Nome*</ion-label>
+      <ion-input [formControl]="userAddForm.controls['firstName']" type="text"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label floating>E-mail</ion-label>
+        <ion-label floating>Sobrenome*</ion-label>
+        <ion-input [formControl]="userAddForm.controls['lastName']" type="text"></ion-input>
+      </ion-item>
+
+    <ion-item>
+      <ion-label floating>E-mail*</ion-label>
       <ion-input [formControl]="userAddForm.controls['email']" type="email"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label floating>Senha</ion-label>
+      <ion-label floating>Senha*</ion-label>
       <ion-input [formControl]="userAddForm.controls['password']" type="password"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label floating>Confirmar senha</ion-label>
+      <ion-label floating>Confirmar senha*</ion-label>
       <ion-input [formControl]="userAddForm.controls['passwordConfirmation']" type="password"></ion-input>
     </ion-item>
 
     <ion-row>
       <ion-col text-center>
-        <button ion-button block color="energy" (click)="onSignIn()">
-          Sign in
-        </button>
-      </ion-col>
-    </ion-row>
-
-    <ion-row>
-      <ion-col text-center>
-        <button ion-button clear color="energy" (click)="onForgotPassword()">
-          Forgot your password?
+        <button ion-button block color="energy" type="submit" [disabled]="!userAddForm.valid">
+          Salvar
         </button>
       </ion-col>
     </ion-row>

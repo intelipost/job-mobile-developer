@@ -15,7 +15,7 @@ export class UsersProvider {
   setUser(obj) {
     return this.dataBaseProvider.getDB()
       .then((db: SQLiteObject) => {
-        let query = "'INSERT INTO user(firstName, lastName, email, password) VALUES (?, ?, ?, ?)'";
+        let query = "'INSERT INTO users(firstName, lastName, email, password) VALUES (?, ?, ?, ?)'";
         let data = [obj.firstName, obj.lastName, obj.email, obj.password];
 
         return db.executeSql(query, data)
