@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, MenuController } from 'ionic-angular';
 import { GeolocationServiceProvider } from '../../providers/geolocation-service/geolocation-service';
+import { LocationsProvider } from '../../providers/locations/locations';
+import { UtilServiceProvider } from '../../providers/util-service/util-service';
 import { Storage } from '@ionic/storage';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 
@@ -19,7 +21,9 @@ export class HomePage {
     private menu: MenuController,
     private geolocationService: GeolocationServiceProvider,
     private storage: Storage,
-    private camera: Camera
+    private camera: Camera,
+    private locationsProvider: LocationsProvider,
+    private utilService: UtilServiceProvider
   ) {
     this.menu.enable(true);
     this.storage.get('userLogged').then((response) => {
@@ -47,16 +51,20 @@ export class HomePage {
   }
 
   synchronize(base64Image) {
-    let objData = [];
+    let objData;
     this.geolocationService.getAllLocations(this.userLogged['id'], 0).then(response => {
       this.locations = response;
-      objData.push({
+      objData = {
         'image': base64Image,
         locations: this.locations
-      });
+      };
 
-      
-
+      this.locationsProvider.sendLocations(objData).subscribe(response => {
+        if(response){
+          this.utilService.presentToast('Informações sincronizadas com sucesso.');
+          console.log(response);
+        }
+      })
     })
   }
 

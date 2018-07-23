@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { IonicStorageModule, Storage } from '@ionic/storage';
-
+import {HttpModule} from '@angular/http';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { AboutPage } from '../pages/about/about';
@@ -47,6 +47,7 @@ import { GeolocationServiceProvider } from '../providers/geolocation-service/geo
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     IonicStorageModule.forRoot(),
     IonicModule.forRoot(MyApp),
   ],

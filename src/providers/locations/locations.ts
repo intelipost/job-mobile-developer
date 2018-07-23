@@ -1,13 +1,21 @@
 import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
 import { DataBaseProvider } from '../data-base/data-base';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/finally';
 
 @Injectable()
 export class LocationsProvider {
   public locations: Array<any> = [];
+  public baseUrl = "https://api.myjson.com/bins";
 
   constructor(
-    public dataBaseProvider: DataBaseProvider
+    public dataBaseProvider: DataBaseProvider,
+    public http: Http
   ) {}
 
 
@@ -42,6 +50,13 @@ export class LocationsProvider {
         )
       }
     )
+  }
+
+  sendLocations(obj): Observable<any> {
+    return this.http.post(this.baseUrl, obj)
+      .map(response => {
+        return response.json();
+      });
   }
 
 }
