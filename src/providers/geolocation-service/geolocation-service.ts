@@ -37,11 +37,11 @@ export class GeolocationServiceProvider {
     )
   }
 
-  getCurrentLocation() {
+  getCurrentLocation(userLogged) {
     return this.geolocation.getCurrentPosition().then((resp) => {
       this.getCurrentTime();
       let arrPosition = {
-        'userID': this.userLogged['id'],
+        'userID': userLogged['id'],
         'lat': resp.coords.latitude,
         'lng': resp.coords.longitude,
         'time': this.timedate,

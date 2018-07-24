@@ -25,9 +25,8 @@ export class MyApp {
   public pages: Array<{ title: string, component: any }>;
   public locations;
   public userLogged: Array<any> = [];
-  public verificationUserLogged;
   public verificationNavigation;
-
+  public verificationInfoUser;
   constructor(
     private platform: Platform,
     private statusBar: StatusBar,
@@ -62,32 +61,33 @@ export class MyApp {
       { title: 'Notícias', component: NewsPage },
       { title: 'Sair', component: LoginPage }
     ];
-    //verica se o usuário fez o login
-    this.storage.get('isUserLogged').then((isUserLogged) => {
-      if (!isUserLogged) {
-        this.storage.clear();
-        this.rootPage = InitialPage;
-        this.splashScreen.hide();
-      } else {
-        //insere a localização a cada 3 minutos
-        setInterval(() => {
+    this.rootPage = InitialPage;
+
+    this.verificationInfoUser = setInterval(() => {
+      this.storage.get('userLogged').then((userLogged) => {
+        console.log("users ======");
+        console.log(userLogged);
+        if (userLogged !== null) {
+          this.userLogged = userLogged;
           this.setLocations();
-        }, 180000);
-        this.rootPage = HomePage;
-        this.splashScreen.hide();
-      }
-    });
+          clearInterval(this.verificationInfoUser);
+        }
+      });
+    }, 3000);
   }
 
-
   setLocations() {
-    this.geolocationService.getCurrentLocation().then(response => {
+    this.geolocationService.getCurrentLocation(this.userLogged).then(response => {
       if (response) {
         console.log("Add new location with success.");
       }
     }).catch(e => {
       console.log("Erro na captura da localização:" + e);
-    })
+    });
+
+    setInterval(() => {
+      this.setLocations();
+    }, 180000);
   }
 
   openPage(page) {

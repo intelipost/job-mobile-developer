@@ -31,26 +31,18 @@ export class HomePage {
     this.menu.enable(true);
     this.storage.get('userLogged').then((response) => {
       this.userLogged = response;
+      this.getLocations();
     });
   }
 
-  ngOnInit() {
-    this.setLocations();
+  ionViewWillEnter() {
+    this.getLocations();
   }
 
-  setLocations() {
-    this.storage.get('userLogged').then((response) => {
-      this.userLogged = response;
-      console.log("response");
-      console.log(response);
-      this.geolocationService.getCurrentLocation().then(response => {
-        this.getLocations();
-      }).catch(e => {
-        console.log('Erro ao pegar a primeira localização: ' + e);
-      })
-    });
-    
+  ionViewDidEnter() {
+    this.getLocations();
   }
+
 
 
   getLocations() {
