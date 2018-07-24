@@ -1,0 +1,48 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title align-title="center">Cadastre-se</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <h2>
+    <img src="assets/imgs/logo.png" class="logo" />
+  </h2>
+  <form [formGroup]="userAddForm" (submit)="addUser()" novalidate>
+    <ion-item>
+      <ion-label floating>Nome*</ion-label>
+      <ion-input [formControl]="userAddForm.controls['firstName']" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label floating>Sobrenome*</ion-label>
+        <ion-input [formControl]="userAddForm.controls['lastName']" type="text"></ion-input>
+      </ion-item>
+
+    <ion-item>
+      <ion-label floating>E-mail*</ion-label>
+      <ion-input [formControl]="userAddForm.controls['email']" type="email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Senha*</ion-label>
+      <ion-input [formControl]="userAddForm.controls['password']" type="password"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Confirmar senha*</ion-label>
+      <ion-input [formControl]="userAddForm.controls['passwordConfirmation']" type="password"></ion-input>
+    </ion-item>
+
+    <ion-row>
+      <ion-col text-center>
+        <button ion-button block color="energy" type="submit" [disabled]="!userAddForm.valid">
+          Salvar
+        </button>
+      </ion-col>
+    </ion-row>
+
+  </form>
+</ion-content>

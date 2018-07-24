@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title align-title="center">My Route</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-row>
+    <ion-col>
+      <ion-list>
+        <ion-item *ngFor="let location of locations">
+          <ion-avatar item-start>
+            <img src="assets/imgs/avatar-localization.png" />
+          </ion-avatar>
+          <h2>Localização: #{{location.id}}</h2>
+          <p>Latitude: {{location.lat}}</p>
+          <p>Longitude: {{location.lng}}</p>
+          <p>Data/Hora: {{location.time}}</p>
+        </ion-item>
+      </ion-list>
+    </ion-col>
+  </ion-row>
+</ion-content>
