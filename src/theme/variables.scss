@@ -34,7 +34,7 @@ $app-direction: ltr;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #488aff,
+  primary:    #9cc500,
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
@@ -87,3 +87,7 @@ $colors: (
 @import "roboto";
 @import "noto-sans";
 
+
+//Altera a cor do texto nos botões nas caixas de alerta
+$alert-ios-button-text-color: gray;
+$alert-md-button-text-color: gray;
