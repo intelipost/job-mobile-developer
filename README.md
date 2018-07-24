@@ -91,7 +91,7 @@ Na linha de comando, digite:
 
 Observação: O plugin Inappbrowser, que foi utilizado para abrir a página com a notícia completa não funcionou com o IOS11. Foi verificado questionamento no fórum do Ionic, mas não há respostas.
 
-![Tela com resultado de testes](Imagem_teste.PNG)
+![Tela com resultado de testes](Imagem_teste.png)
 
 
 
