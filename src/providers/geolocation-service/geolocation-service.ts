@@ -30,7 +30,6 @@ export class GeolocationServiceProvider {
       .then((db: SQLiteObject) => {
         let query = 'INSERT INTO locations(lat, lng, time, status, user_id) VALUES (?, ?, ?, ?, ?)';
         let data = [obj.lat, obj.lng, obj.time, obj.status, obj.userID];
-
         return db.executeSql(query, data)
           .catch(err => console.log('Error ao inserir o localização:', err)
         )
@@ -38,29 +37,9 @@ export class GeolocationServiceProvider {
     )
   }
 
-  getAllLocations(userID, status) {
-    return this.dataBaseProvider.getDB()
-      .then((db: SQLiteObject) => {
-        let query = 'SELECT * FROM locations WHERE user_id = ? AND status = ? ORDER BY id DESC';
-        let data = [userID, status];
-        return db.executeSql(query, data)
-          .then(data => {
-            if(data.rows.length > 0) {
-              for (let i = 0; i < data.rows.length; i++) {
-                this.locations.push(data.rows.item(i));
-              }
-              return this.locations;
-            }
-          })
-          .catch(err => console.log('Erro ao buscar localizações:', err)
-        )
-      }
-    )
-  }
-
   getCurrentLocation() {
-    this.getCurrentTime();
     return this.geolocation.getCurrentPosition().then((resp) => {
+      this.getCurrentTime();
       let arrPosition = {
         'userID': this.userLogged['id'],
         'lat': resp.coords.latitude,
@@ -78,6 +57,14 @@ export class GeolocationServiceProvider {
      }).catch((error) => {
        console.log('Error getting location', error);
      });
+  }
+
+  getVerifyLocation() {
+    return this.geolocation.getCurrentPosition().then((resp) => {
+        return resp.coords.latitude;
+      }).catch(e => {
+        console.log("Erro ao salvar localização: "+ e);
+      });
   }
   
 

@@ -3,18 +3,15 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { IonicStorageModule, Storage } from '@ionic/storage';
 import {HttpModule} from '@angular/http';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { AboutPage } from '../pages/about/about';
 import { LoginPage } from '../pages/login/login';
 import { LocationsPage } from '../pages/locations/locations';
-import { LocationPage } from '../pages/location/location';
-import { ContactPage } from '../pages/contact/contact';
-import { ProfilePage } from '../pages/profile/profile';
-import { PresentationPage } from '../pages/presentation/presentation';
 import { InitialPage } from '../pages/initial/initial';
 import { SignUpPage } from '../pages/sign-up/sign-up';
-
+import { NewsPage } from '../pages/news/news';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -23,6 +20,7 @@ import { SQLite } from '@ionic-native/sqlite';
 import { Toast } from '@ionic-native/toast';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Camera } from '@ionic-native/camera';
+import { AndroidPermissions } from '@ionic-native/android-permissions';
 
 //providers
 import { DataBaseProvider } from '../providers/data-base/data-base';
@@ -30,20 +28,17 @@ import { UsersProvider } from '../providers/users/users';
 import { LocationsProvider } from '../providers/locations/locations';
 import { UtilServiceProvider } from '../providers/util-service/util-service';
 import { GeolocationServiceProvider } from '../providers/geolocation-service/geolocation-service';
+import { NewsProvider } from '../providers/news/news';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    AboutPage,
     LoginPage,
     LocationsPage,
-    LocationPage,
-    ContactPage,
-    ProfilePage,
-    PresentationPage,
     InitialPage,
-    SignUpPage
+    SignUpPage,
+    NewsPage
   ],
   imports: [
     BrowserModule,
@@ -55,15 +50,11 @@ import { GeolocationServiceProvider } from '../providers/geolocation-service/geo
   entryComponents: [
     MyApp,
     HomePage,
-    AboutPage,
     LoginPage,
     LocationsPage,
-    LocationPage,
-    ContactPage,
-    ProfilePage,
-    PresentationPage,
     InitialPage,
-    SignUpPage
+    SignUpPage,
+    NewsPage
   ],
   providers: [
     StatusBar,
@@ -73,11 +64,15 @@ import { GeolocationServiceProvider } from '../providers/geolocation-service/geo
     Toast,
     Geolocation,
     Camera,
+    FileTransfer,
+    File,
+    AndroidPermissions,
     DataBaseProvider,
     UsersProvider,
     LocationsProvider,
     UtilServiceProvider,
-    GeolocationServiceProvider
+    GeolocationServiceProvider,
+    NewsProvider
   ]
 })
 export class AppModule {}

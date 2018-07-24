@@ -10,43 +10,32 @@ import 'rxjs/add/operator/finally';
 
 @Injectable()
 export class LocationsProvider {
-  public locations: Array<any> = [];
-  public baseUrl = "https://api.myjson.com/bins";
+  public locationsList: Array<any>;
+  public baseUrl = "http://requestbin.fullcontact.com/114p0ht1";
 
   constructor(
     public dataBaseProvider: DataBaseProvider,
     public http: Http
-  ) {}
-
-
-  insertLocations(obj) {
-    return this.dataBaseProvider.getDB()
-      .then((db: SQLiteObject) => {
-        let query = "INSERT INTO locations(time, lng, lat) VALUES (?, ?, ?)";
-        let data = [obj.time, obj.lng, obj.lat];
-
-        return db.executeSql(query, data)
-          .catch(err => console.log('Error ao inserir a localização:', err)
-        )
-      }
-    )
+  ) {
+    this.locationsList = [];
   }
 
-  getAllLocations() {
+  getAllLocations(userID, status) {
     return this.dataBaseProvider.getDB()
       .then((db: SQLiteObject) => {
-        let query = "SELECT * FROM locations ORDER BY id DESC";
-        let data = [];
+        let query = 'SELECT * FROM locations WHERE user_id = ? AND status = ? ORDER BY id DESC';
+        let data = [userID, status];
+        this.locationsList = [];
         return db.executeSql(query, data)
           .then(data => {
             if(data.rows.length > 0) {
               for (let i = 0; i < data.rows.length; i++) {
-                this.locations.push(data.rows.item(i));
+                this.locationsList.push(data.rows.item(i));
               }
-              return this.locations;
+              return this.locationsList;
             }
           })
-          .catch(err => console.log('Erro ao buscar as localizações:', err)
+          .catch(err => console.log('Erro ao buscar localizações:', err)
         )
       }
     )

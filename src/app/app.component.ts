@@ -4,15 +4,15 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Storage } from '@ionic/storage';
 import { HomePage } from '../pages/home/home';
-import { AboutPage } from '../pages/about/about';
 import { LoginPage } from '../pages/login/login';
 import { LocationsPage } from '../pages/locations/locations';
-import { ContactPage } from '../pages/contact/contact';
-import { ProfilePage } from '../pages/profile/profile';
 import { InitialPage } from '../pages/initial/initial';
+import { NewsPage } from '../pages/news/news';
 import { SignUpPage } from '../pages/sign-up/sign-up';
 import { DataBaseProvider } from '../providers/data-base/data-base';
 import { GeolocationServiceProvider } from '../providers/geolocation-service/geolocation-service';
+import { UtilServiceProvider } from '../providers/util-service/util-service';
+import { NewsProvider } from '../providers/news/news';
 
 @Component({
   templateUrl: 'app.html'
@@ -25,6 +25,8 @@ export class MyApp {
   public pages: Array<{ title: string, component: any }>;
   public locations;
   public userLogged: Array<any> = [];
+  public verificationUserLogged;
+  public verificationNavigation;
 
   constructor(
     private platform: Platform,
@@ -34,6 +36,7 @@ export class MyApp {
     private storage: Storage,
     private dataBaseProvider: DataBaseProvider,
     private geolocationService: GeolocationServiceProvider,
+    private utilService: UtilServiceProvider
   ) {
     this.initializeApp();
   }
@@ -42,48 +45,45 @@ export class MyApp {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
-      //cria o banco de dados
-      this.dataBaseProvider.createDatabase();
-      // monta o menu
-      this.pages = [
-        { title: 'Home', component: HomePage },
-        { title: 'Minhas Localizações', component: LocationsPage },
-        { title: 'Sobre', component: AboutPage },
-        { title: 'Contato', component: ContactPage },
-        { title: 'Meus Dados', component: ProfilePage },
-        { title: 'Sair', component: LoginPage }
-      ];
-      //verica se o usuário fez o login
-      this.storage.get('isUserLogged').then((isUserLogged) => {
-        if (!isUserLogged) {
-          this.rootPage = InitialPage;
-          this.splashScreen.hide();
-        } else {
-          this.storage.get('userLogged').then((response) => {
-            this.userLogged = response;
-            this.setCaptureLocation();
-          });
-          //Verificando se é o primeiro acesso
-          /**
-           * this.storage.get('onBoardingCompleted').then((onBoardingCompleted) => {
-            this.rootPage = onBoardingCompleted ? "HomePage" : "OnboardingPage";
-            this.splashScreen.hide();
-          });
-           */
-        }
+      this.geolocationService.getVerifyLocation().then(response => {
+        this.init();
       });
     });
   }
 
-  setCaptureLocation() {
+  init() {
+    this.statusBar.styleDefault();
+    //cria o banco de dados
+    this.dataBaseProvider.createDatabase();
+    // monta o menu
+    this.pages = [
+      { title: 'Home', component: HomePage },
+      { title: 'Minhas Localizações', component: LocationsPage },
+      { title: 'Notícias', component: NewsPage },
+      { title: 'Sair', component: LoginPage }
+    ];
+    //verica se o usuário fez o login
+    this.storage.get('isUserLogged').then((isUserLogged) => {
+      if (!isUserLogged) {
+        this.storage.clear();
+        this.rootPage = InitialPage;
+        this.splashScreen.hide();
+      } else {
+        //insere a localização a cada 3 minutos
+        setInterval(() => {
+          this.setLocations();
+        }, 180000);
+        this.rootPage = HomePage;
+        this.splashScreen.hide();
+      }
+    });
+  }
+
+
+  setLocations() {
     this.geolocationService.getCurrentLocation().then(response => {
       if (response) {
-        // Timeout de 5 segundos pra chamar novamente a função que pega as coordenadas
-        setTimeout(() => {
-          this.setCaptureLocation();
-        }, 5000);
+        console.log("Add new location with success.");
       }
     }).catch(e => {
       console.log("Erro na captura da localização:" + e);

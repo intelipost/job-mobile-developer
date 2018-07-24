@@ -1,11 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ToastController } from 'ionic-angular';
+import { ToastController, LoadingController } from 'ionic-angular';
 
 @Injectable()
 export class UtilServiceProvider {
+  
+  public loading;
 
-  constructor(private toastCtrl: ToastController) {
+  constructor(
+    private toastCtrl: ToastController,
+    public loadingCtrl: LoadingController
+  ) {
 
   }
 
@@ -21,5 +26,17 @@ export class UtilServiceProvider {
     });
   
     toast.present();
+  }
+
+  openLoading() {
+    this.loading = this.loadingCtrl.create({
+      content: 'Aguarde...'
+    });
+  
+    this.loading.present();
+  }
+
+  closeLoading() {
+    this.loading.dismiss();
   }
 }
