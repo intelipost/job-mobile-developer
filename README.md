@@ -1,65 +1,104 @@
 # Intelipost: Teste prático para Desenvolvedor Mobile
 
-Este é o teste usado por nós aqui da [Intelipost](http://www.intelipost.com.br) para avaliar tecnicamente os candidatos a nossas vagas de Desenvolvedor Mobile. Se você estiver participando de um processo seletivo para nossa equipe, certamente em algum momento receberá este link, mas caso você tenha chego aqui "por acaso", sinta-se convidado a desenvolver nosso teste e enviar uma mensagem para nós nos e-mails `stefan.rehm@intelipost.com.br` e `gustavo.hideyuki@intelipost.com.br`.
-
-Aqui na Intelipost nós aplicamos este mesmo teste para as vagas em todos os níveis, ou seja, um candidato a uma vaga de desenvolvedor mobile júnior fará o mesmo teste de um outro candidato a uma vaga de desenvolvedor mobile sênior, mudando obviamente o nosso critério de avaliação do resultado do teste. 
-
-Nós fazemos isso esperando que as pessoas mais iniciantes entendam qual o modelo de profissional que temos por aqui e que buscamos para o nosso time. Portanto, se você estiver se candidatando a uma vaga mais iniciante, não se assuste, e faça o melhor que você puder!
-
-## Instruções
-
-Você deverá criar um `fork` deste projeto, e desenvolver em cima do seu fork. Use o *README* principal do seu repositório para nos contar como foi resolver seu teste, as decisões tomadas, como você organizou e separou seu código, e principalmente as instruções de como rodar seu projeto, afinal a primeira pessoa que irá rodar seu projeto será um programador backend de nossa equipe, e se você conseguir explicar para ele como fazer isso, você já começou bem!
-
-Lembre-se que este é um teste técnico e não um concurso público, portanto, não existe apenas uma resposta correta. Mostre que você é bom e nos impressione, mas não esqueça do objetivo do projeto. 
-
-Nós não definimos um tempo limite para resolução deste teste, o que vale para nós e o resultado final e a evolução da criação do projeto até se atingir este resultado, mas acreditamos que este desafio pode ser resolvido em cerca de 16 horas de codificação.
-
-## Um pouco sobre a Intelipost
-
-A Intelipost é uma startup de tecnologia que está revolucionando a logística no Brasil, um mercado de R$ 300B por ano com muitas ineficiências e desafios. Temos um sistema inovador que gerencia a logística para empresas do e-commerce. Já recebemos R$11 milhões de investimento até o momento, e em pouquissimo tempo já estamos colhendo grandes resultados: Em 2016 fomos selecionados como uma empresa [Promessas Endeavor](https://ecommercenews.com.br/noticias/parcerias-comerciais/intelipost-e-selecionada-pelo-promessas-endeavor/), também [ganhamos a competição IBM Smartcamp](https://www.ibm.com/blogs/robertoa/2016/11/intelipost-e-nazar-vencem-o-ibm-smartcamp-brasil-2016/), com foco de Big Data e data analysis, o que nos rendeu a [realização de um Hackathon sobre Blockchain junto a IBM](https://www.ibm.com/blogs/robertoa/2017/09/intelipost-e-ibm-realizam-o-primeiro-hackathon-de-blockchain-em-startup-do-brasil/), e em 2017 [fomos selecionados pela Oracle para sermos acelerados por eles no programa Oracle Startup Cloud Accelerator](https://www.oracle.com/br/corporate/pressrelease/oracle-anuncia-startups-selecionadas-programa-oracle-startup-cloud-accelerator-sao-paulo-20170804.html).
-
-Tecnicamente, o nosso maior desafio hoje é estar preparado para atender a todos os nossos clientes, que além de muitos, são grandes em número de requisições (Americanas, Submarino, Shoptime, Lojas Renner, Boticário, Livraria Cultura, Magazine Luize, etc), totalizando mais de meio bilhão de requisições por mês.
-
-Para isso, organizamos nosso sistema em micro serviços na AWS com Docker e Kubernetes, utilizando Java 8, Spring 4 (principalmente spring-boot), PostgreSQL, ElasticSearch e Redis. Temos um frontend para acesso dos clientes desenvolvido Vue.JS e mobile apps utilizando o framework Ionic.
-
-## O desafio
-
-Você deverá construir usando ***IONIC 3*** um aplicativo que irá rastrear os movimentos do celular do usuário a cada 3 minutos, buscando sua localização pelo GPS com alta precisão. Deverá armazenar localmente estas informações, uma vez que o aplicativo pode estar funcionando sem conectividade com a internet. Seria interessante que pudessemos ver as últimas localizações captadas, com horário e coordenadas.
-
-Uma vez captadas a localização do usuário, ele deverá ter uma função no aplicativo para "sincronizar" com o servidor estes dados. Quando solicitada a sincronização o usuário deverá tirar uma selfie, usando a camera do celular, e enviar esta imagem (encodada em base64) junto com a lista de todas as posições rastreadas para um servidor externo. 
-
-O envio deverá ser em um objeto JSON, e o endpoint poderá ser temporário, configurado em qualquer serviço com este fim como requestbin (https://requestbin.fullcontact.com/) ou hookbin (https://hookbin.com).
-
-Também ter uma tela que liste notícias com foto e que seja possível ver a noticia por completo, pode usar qualquer api externa ou criar um mock de API.
-
-### O que nós esperamos do seu teste
-
-* O código deverá ser hospedado em algum repositório público. Diversos quesitos serão avaliados aqui, como organização do código, sequencialidade de commits, nomeação de arquivos, funções, etc.
-* O código deverá estar pronto para ser executado e testado, portanto, caso exista algum requisito, este deve estar completamente documentado no README do seu projeto.
-* Esperamos também alguma explicação sobre a solução, que pode ser em comentários no código, um texto escrito ou até um vídeo narrativo explicando a abordagem utilizada. 
-* Seria interessante ter telas com uma identidade visual e utilizar componentes de template do Ionic.
-* Ver a utilização de dependency managers (npm, webpack)
-* Se possível um icone e splash screen para o app
-* Automação de tasks com gulp ou outra ferramenta de sua escolha
+Este projeto refere-se ao teste da Intelipost para a vaga de Desenvolvedor Mobile.
+O teste pode ser verificado em [https://github.com/intelipost/job-mobile-developer]( https://github.com/intelipost/job-mobile-developer).
 
 
-### O que nós ficaríamos felizes de ver em seu teste
+## O aplicativo
 
-* Testes
-* Processo de build e deploy documentado
-* Ver o código rodando live (Com Ionic DevApp)
-* Alguma metodologia para definição e organização do seu código CSS
+O aplicativo consiste em duas páginas:
 
-### O que nós não gostaríamos
+- Notícias:
+Nesta página é possível verificar uma lista com 20 notícias, com título, foto e breve descrição. As notícias são provenientes do News API ([https://newsapi.org/s/google-news-api](https://newsapi.org/s/google-news-api)).
+É possível atualizar a lista clicando no botão verde superior.
+Caso o usuário queira ver a notícia completa, poderá clicar em qualquer local da notícia e será aberta uma página com o site original.
 
-* Descobrir que não foi você quem fez seu teste
-* Ver commits grandes, sem muita explicação nas mensagens em seu repositório 
+![Tela Notícias](Imagem_tela_1.PNG)
 
-## O que avaliaremos de seu teste
+- Localização
+Enquanto o aplicativo está em uso, são armazenadas as localizações GPS do usuário quando entra no aplicativo e a cada 3 minutos.
+Esta página mostra as localizações armazanadas que ainda não foram sincronizadas.
+Para sincronizar, o usuário deve clicar no botão verde no canto superior direito. Será solicitado para que tire uma selfie, que será enviada junto com os dados de localização.
+Após a sincronização, os registros de localização que já foram enviados são apagados do aplicativo.
 
-* Histórico de commits do git
-* As instruções de como rodar o projeto
-* Organização, semântica, estrutura, legibilidade, manutenibilidade do seu código
-* Alcance dos objetivos propostos
-* Escalabilidade da solução adotada 
-* Componentização e extensibilidade dos componentes Javascript
+![Tela Localização](Imagem_tela_2.PNG)
+
+
+## Código do aplicativo
+
+O código está organizado nas seguintes pastas, em \src:
+
+- app:
+O arquivo app.component.ts contém os scripts de inicialização do aplicativo, bem como a rotina que executa a verificação da localização a cada 3 minutos.
+No arquivo app.module.ts, foram declarados os plugins, páginas, módulos e providers utilizados.
+
+- domain:
+Os arquivos dessa pasta contém padrões para as variáveis que armazenam notícias.
+
+- pages:
+Esta pasta contém 4 subpastas, uma para cada página do aplicativo: tabs, noticias, noticias-detalhe e localização.
+Cada pasta contem seu respectivo arquivo HTLM, CSS e TS.
+
+- pipes:
+Foram criados pipes para mostrar o timestamp em formato de data e hora na página localização.
+
+- providers:
+Os serviços de geolocalização, busca de notícias e sincronização foram separados em providers, para facilitar o acesso e a manutenção.
+
+- theme:
+Nessa pasta está o arquivo variables.scss, que contém as variáveis globais de css do aplicativo. Nesse arquivo foi modificada a cor primária para verde (cor da Intelipost) e foi alterada a cor do texto nos botões nas caixas de alerta.
+
+
+### Plugins utilizados
+
+- Geolocation
+cordova-plugin-geolocation
+Plugin utilizado para verificar a localização do usuário quando abre o aplicativo e a cada 3 minutos.
+
+- Camera
+cordova-plugin-camera
+Utilizado para tirar a selfie. A imagem em formato base64 será enviada quando form feita a sincrinização.
+
+- In App Browser
+cordova-plugin-inappbrowser
+Para abertura da notícia no aplicativo.
+
+- SQLite
+cordova-sqlite-storage
+Utilizado para armazenamento local dos dados até que sejam sincronizados. Foi utilizado o Storage do Ionic.
+
+
+## Instalação
+
+Instale as dependências, executando na linha de comando, na pasta do aplicativo:
+
+    npm install
+
+Em seguida, informe o endereço do endpoint que receberá as localizações e a selfie do usuário. Para esse teste, sugiro usar o [www.webhook.com](www.webhook.com) e copiar o endereço que será informado na página. No último parâmetro da linha abaixo, use o seu endereço.
+
+    gulp setUrl --url https://webhook.site/#/seuendereco
+
+Observação: O endereço tambémm pode ser alterado na linha 5 do arquivo sincronizacao-service.ts.
+
+
+## Testes
+
+Os testes podem ser feitos com o Ionic Dev App.
+
+Na linha de comando, digite: 
+
+    ionic serve -c
+
+Observação: O plugin Inappbrowser, que foi utilizado para abrir a página com a notícia completa não funcionou com o IOS11. Foi verificado questionamento no fórum do Ionic, mas não há respostas.
+
+![Tela com resultado de testes](Imagem_teste.png)
+
+
+
+
+
+
+
+
+
+

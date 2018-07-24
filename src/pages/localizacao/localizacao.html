@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Localização
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <form (ngSubmit)="enviarLocalizacoes()" id="form2">
+
+    <ion-list>
+        <ion-item *ngFor = "let posicao of _posicoes">
+          <h2>Latitude: {{posicao.latitude == "Erro" ? "Erro" : posicao.latitude | number: '1.5-5'}}</h2>
+          <h2>Longitude: {{posicao.longitude == "Erro" ? "Erro" : posicao.longitude | number: '1.5-5'}}</h2>
+          <ion-note item-end>
+            <h3>
+              {{posicao.timestamp | valorData}}<br>
+              {{posicao.timestamp | valorHora}}
+            </h3>
+          </ion-note>
+        </ion-item>
+      </ion-list>
+
+  </form>
+
+  <ion-fab top right edge>
+      <button ion-fab mini form="form2" type="submit">
+        <ion-icon name="send"></ion-icon>
+      </button>
+  </ion-fab>
+
+  
+
+
+</ion-content>

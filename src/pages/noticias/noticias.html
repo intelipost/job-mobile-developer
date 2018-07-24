@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Notícias</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <form (ngSubmit)="atualizarNoticias()" id="form1">
+    <ion-card *ngFor = "let noticia of _noticias" (click)="abrirNoticia(noticia.url)">
+        <ion-item>
+          <h2>{{noticia.title}}</h2>
+          <p>{{noticia.source.name}}</p>
+          <p>{{noticia.publishedAt}}</p>
+        </ion-item>
+    
+        <img src="{{noticia.urlToImage}}" (error)="img.src = ''" #img>
+    
+        <ion-card-content>
+            <p>{{noticia.description}}</p>
+        </ion-card-content>
+    
+      </ion-card>
+  </form>
+
+  <ion-fab top right edge>
+      <button ion-fab mini form="form1" type="submit">
+        <ion-icon name="refresh"></ion-icon>
+      </button>
+  </ion-fab>  
+
+
+  <div padding>
+    <p>Powered by News API</p>
+  </div>
+
+
+</ion-content>
